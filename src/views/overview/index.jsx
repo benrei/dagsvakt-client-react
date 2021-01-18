@@ -105,7 +105,7 @@ const Overview = props => {
   const customersObjectsServices = JSON.parse(
     JSON.stringify(data && data.customersObjectsServices)
   );
-  apiUtils.agColumnsToGqlQuery("test", columns);
+  apiUtils.agColumnsToGqlQuery("customersObjectsServices", columns);
   return (
     <div className="ag-theme-alpine" style={{ height: "90vh", width: "100%" }}>
       <GridHeader>

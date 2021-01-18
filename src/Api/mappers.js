@@ -1,12 +1,9 @@
 const set = require("lodash.set");
 const agColumnsToGqlQuery = (queryName, agColumns = []) => {
   const _args = ``;
-  const gqlObj = buildGqlObj(agColumns);
-  console.log(gqlObj);
 
-  let query = `${queryName}(${_args}) {
-    ${""}
-  }`;
+  let query = `{\n${queryName}${_args}${buildGqlObj(agColumns)}\n}`;
+  console.log(query);
 
   return query;
 };
@@ -16,23 +13,15 @@ const buildGqlObj = agColumns => {
   agColumns.filter(c => c.field).forEach(({ field }) => set(obj, field, field));
 
   const buildGqlString = (obj, str = "") => {
-    str += "{\n";
+    str += ` {\n`;
     Object.keys(obj).forEach(key => {
-      if (typeof obj[key] !== "object") str += key + "\n";
-      else str += buildGqlString(obj[key], key);
+      if (typeof obj[key] !== "object") str += `${key}\n`;
+      else str += `${buildGqlString(obj[key], key)}`;
     });
-    str += "\n}";
+    str += `\n}`;
     return str;
   };
-  console.log(buildGqlString(obj, ""));
-
-  let str = "";
-  Object.keys(obj).forEach(key => {
-    if (key === typeof "string") str += key + "\n";
-  });
-  console.log(str);
-
-  return obj;
+  return buildGqlString(obj, "");
 };
 
 const unflatten = obj => {
