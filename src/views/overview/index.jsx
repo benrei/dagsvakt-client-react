@@ -23,7 +23,9 @@ const Overview = props => {
   const [gridColumnApi, setGridColumnApi] = useState(null);
   const [selectedRow, setSelectedRow] = useState(null);
   const [quickFilterText, setQuickFilterText] = useState("");
-  const { loading, error, data } = useQuery(api.customersTable);
+  const { loading, error, data } = useQuery(
+    apiUtils.agColumnsToGqlQuery("customersObjectsServices", columns)
+  );
   const [updateCustomer] = useMutation(api.customerUpdate);
 
   function onGridReady(params) {
@@ -105,9 +107,7 @@ const Overview = props => {
   const customersObjectsServices = JSON.parse(
     JSON.stringify(data && data.customersObjectsServices)
   );
-  console.log(
-    apiUtils.agColumnsToGqlQuery("customersObjectsServices", columns)
-  );
+  console.log();
   return (
     <div className="ag-theme-alpine" style={{ height: "90vh", width: "100%" }}>
       <GridHeader>

@@ -1,9 +1,13 @@
+import { gql } from "@apollo/client";
 const set = require("lodash.set");
+
 const agColumnsToGqlQuery = (queryName, agColumns = [], args) => {
   // TODO: args
   const _args = args ? "" : ``;
   let query = `{\n${queryName}${_args}${buildGqlObj(agColumns)}\n}`;
-  return query;
+  return gql`
+    ${query}
+  `;
 };
 
 const buildGqlObj = agColumns => {
