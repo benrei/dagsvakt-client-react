@@ -16,6 +16,7 @@ import contextMenus from "../../agGrid/gridOptions/getContextMenuItems";
 
 import { useMutation, useQuery } from "@apollo/client";
 import api from "../../Api";
+import apiUtils from "../../Api/mapper";
 
 const GridCustomers = props => {
   const [gridApi, setGridApi] = useState(null);
@@ -102,6 +103,7 @@ const GridCustomers = props => {
   };
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
+  apiUtils.agColumnsToGqlQuery(columns);
   return (
     <div className="ag-theme-alpine" style={{ height: "90vh", width: "100%" }}>
       <GridHeader>
