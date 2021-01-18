@@ -17,6 +17,16 @@ const columns = [
     hide: true,
     getQuickFilterText: params => JSON.stringify(params.value)
   },
+  { field: "objects._id", lockVisible: true },
+  { field: "objects.customerId", lockVisible: true },
+  { field: "objects.brand", lockVisible: true },
+  { field: "objects.model", lockVisible: true },
+  { field: "objects.info", lockVisible: true },
+  { field: "objects.serialIn", lockVisible: true },
+  { field: "objects.serialOut", lockVisible: true },
+  { field: "objects.installedTime", lockVisible: true },
+  { field: "objects.serviceInterval", lockVisible: true },
+  { field: "objects.warrantyStartTime", lockVisible: true },
   {
     headerName: "Pumper",
     editable: false,
